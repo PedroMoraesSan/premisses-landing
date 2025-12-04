@@ -1,0 +1,67 @@
+import Link from "next/link";
+import { ChangeEvent } from "react";
+import { motion } from "framer-motion";
+import { FaGithub, FaXTwitter } from "react-icons/fa6";
+import { Input } from "@/components/ui/input";
+import { FaArrowRightLong } from "react-icons/fa6";
+import { EnhancedButton } from "@/components/ui/enhanced-btn";
+import { containerVariants, itemVariants } from "@/lib/animation-variants";
+
+interface FormProps {
+  name: string;
+  email: string;
+  handleNameChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleEmailChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit: () => void;
+  loading: boolean;
+}
+
+export default function Form({
+  name,
+  email,
+  handleNameChange,
+  handleEmailChange,
+  handleSubmit,
+  loading,
+}: FormProps) {
+  return (
+    <motion.div
+      className="mt-6 flex w-full max-w-[24rem] flex-col gap-2"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible">
+      <motion.div variants={itemVariants}>
+        <Input
+          type="text"
+          placeholder="Seu Nome"
+          value={name}
+          onChange={handleNameChange}
+        />
+      </motion.div>
+      <motion.div variants={itemVariants}>
+        <Input
+          type="email"
+          placeholder="Seu Email"
+          value={email}
+          onChange={handleEmailChange}
+        />
+      </motion.div>
+      <motion.div variants={itemVariants}>
+        <EnhancedButton
+          variant="expandIcon"
+          Icon={FaArrowRightLong}
+          onClick={handleSubmit}
+          iconPlacement="right"
+          className="mt-2 w-full"
+          disabled={loading}>
+          {loading ? "Carregando..." : "Entrar na Lista de Espera!"}
+        </EnhancedButton>
+      </motion.div>
+      <motion.div
+        variants={itemVariants}
+        className="mt-4 flex w-full items-center justify-center gap-1 text-muted-foreground">
+        <p>Para dúvidas, entre em contato </p>
+      </motion.div>
+    </motion.div>
+  );
+}

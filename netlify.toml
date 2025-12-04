@@ -1,0 +1,14 @@
+[build]
+  command = "npm install && npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build.environment]
+  NODE_VERSION = "20"
+  NPM_FLAGS = "--legacy-peer-deps"
+
+# O plugin @netlify/plugin-nextjs gerencia automaticamente as rotas do Next.js
+# Ele detecta automaticamente API routes, páginas estáticas e SSR
+
